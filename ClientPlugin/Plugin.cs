@@ -1,55 +1,46 @@
-﻿using System;
+﻿using HarmonyLib;
+using SeDirectConnect.Settings;
+using System;
 using System.Reflection;
-using ClientPlugin.Settings;
-using ClientPlugin.Settings.Layouts;
-using HarmonyLib;
-using Sandbox.Graphics.GUI;
 using VRage.Plugins;
+using VRage.Utils;
 
-namespace ClientPlugin
+namespace SeDirectConnect
 {
     // ReSharper disable once UnusedType.Global
     public class Plugin : IPlugin, IDisposable
     {
-        public const string Name = "ClientPluginTemplate";
+        public const string Name = "SEDirectConnect";
         public static Plugin Instance { get; private set; }
-        private SettingsGenerator settingsGenerator;
+        public Config Config;
+
+        private Harmony _harmony;
+        public static string PluginNamespace = "SeDirectConnect";
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
         public void Init(object gameInstance)
         {
             Instance = this;
-            Instance.settingsGenerator = new SettingsGenerator();
+            Instance.Config = ConfigPersistence.LoadConfig();
+            ConfigPersistence.GenerateDefaultConfig();
 
-            // TODO: Put your one time initialization code here.
-            Harmony harmony = new Harmony(Name);
-            harmony.PatchAll(Assembly.GetExecutingAssembly());
+
+            _harmony = new Harmony(PluginNamespace);
+            _harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
 
         public void Dispose()
         {
-            // TODO: Save state and close resources here, called when the game exits (not guaranteed!)
-            // IMPORTANT: Do NOT call harmony.UnpatchAll() here! It may break other plugins.
-
             Instance = null;
         }
 
         public void Update()
+        { }
+
+        public void ReloadConfig()
         {
-            // TODO: Put your update code here. It is called on every simulation frame!
+            Instance.Config = ConfigPersistence.LoadConfig();
+            MyLog.Default.WriteLineAndConsole($"[SEDC-Plugin] Reloaded config");
         }
-
-        // ReSharper disable once UnusedMember.Global
-        public void OpenConfigDialog()
-        {
-            Instance.settingsGenerator.SetLayout<Simple>();
-            MyGuiSandbox.AddScreen(Instance.settingsGenerator.Dialog);
-        }
-
-        //TODO: Uncomment and use this method to load asset files
-        /*public void LoadAssets(string folder)
-        {
-
-        }*/
     }
 }

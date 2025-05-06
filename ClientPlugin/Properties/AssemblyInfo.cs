@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ClientPluginTemplate")]
+[assembly: AssemblyTitle("Sdx_se_direct_connect")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ClientPluginTemplate")]
+[assembly: AssemblyProduct("Sdx_se_direct_connect")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("A061FC6C-713E-42CD-B413-151AC8A5074C")]
+[assembly: Guid("8EF0EE22-338C-4E13-A6BE-0C34AD5D9C2A")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -4,14 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A061FC6C-713E-42CD-B413-151AC8A5074C}</ProjectGuid>
+    <ProjectGuid>{8EF0EE22-338C-4E13-A6BE-0C34AD5D9C2A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClientPlugin</RootNamespace>
-    <AssemblyName>ClientPluginTemplate</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <AssemblyName>Sdx_se_direct_connect</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <LangVersion>7.3</LangVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -419,6 +420,7 @@
       <HintPath>$(Bin64)\System.Runtime.Numerics.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Runtime.Serialization.Formatters, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>$(Bin64)\System.Runtime.Serialization.Formatters.dll</HintPath>
       <Private>False</Private>
@@ -627,26 +629,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\ConfigStorage.cs" />
-    <Compile Include="Settings\Elements\Button.cs" />
-    <Compile Include="Settings\Elements\Checkbox.cs" />
-    <Compile Include="Settings\Elements\Color.cs" />
-    <Compile Include="Settings\Elements\Control.cs" />
-    <Compile Include="Settings\Elements\Dropdown.cs" />
-    <Compile Include="Settings\Elements\Element.cs" />
-    <Compile Include="Settings\Elements\Keybind.cs" />
-    <Compile Include="Settings\Elements\Slider.cs" />
-    <Compile Include="Settings\Elements\Textbox.cs" />
-    <Compile Include="Settings\Layouts\Layout.cs" />
-    <Compile Include="Settings\Layouts\None.cs" />
-    <Compile Include="Settings\Layouts\Simple.cs" />
-    <Compile Include="Settings\SettingsGenerator.cs" />
-    <Compile Include="Settings\SettingsScreen.cs" />
-    <Compile Include="Settings\Tools\Binding.cs" />
-    <Compile Include="Settings\Tools\Tools.cs" />
+    <Compile Include="Settings\Config.cs" />
+    <Compile Include="Settings\ConfigPersistence.cs" />
+    <Compile Include="Util\PatchMainMenu.cs" />
+    <Compile Include="Util\TraceScreens.cs" />
+    <Compile Include="Util\PatchJoinGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="deploy.bat" />
@@ -656,8 +645,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Lib.Harmony" Version="2.3.3" />
+    <PackageReference Include="Lib.Harmony" Version="2.3.5" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>call "$(SolutionDir)verify_props.bat" "$(Bin64)"</PreBuildEvent>
