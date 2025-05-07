@@ -30,13 +30,21 @@ namespace SeDirectConnect.Util
                         $"[SEDC‑GUI] {c.GetType().Name,-25}  name=\"{c.Name}\""
                         + $"  pos={c.Position}  size={c.Size}");
 
-            var joinButton = __instance.Controls.GetControlByName("JoinWorld") as MyGuiControlButton;
+            MyGuiControlButton refButton =
+                __instance.Controls.GetControlByName("JoinWorld") as MyGuiControlButton ??
+                __instance.Controls.GetControlByName("SaveWorld") as MyGuiControlButton;
+
+            if (refButton == null)
+            {
+                MyLog.Default.WriteLineAndConsole($"[SEDC-Plugin] Could not find the reference button.");
+                return;
+            }
 
             // show at the right of the join button
             var quickJoinButton = new MyGuiControlButton()
             {
-                Position = joinButton.Position + new Vector2(joinButton.Size.X, -joinButton.Size.Y / 2),
-                Size = joinButton.Size,
+                Position = refButton.Position + new Vector2(refButton.Size.X, -refButton.Size.Y / 2),
+                Size = refButton.Size,
                 Name = "Direct Connect",
                 Text = "Direct Connect",
                 VisualStyle = MyGuiControlButtonStyleEnum.Default,
